@@ -15,7 +15,11 @@ namespace gestioncomposantdepartement.DAO.MySql
         private const int COEFFICIENT_COEFFICIENT = 1;
 
         private const int ID_TYPE_COURS = 4;
-        private const int NOM_TYPE_COURS = 5; 
+        private const int NOM_TYPE_COURS = 5;
+
+        private const int ID_CATEGORIE = 6;
+        private const int NOM_CATEGORIE = 7;
+        private const int NB_HEURE_CATEGORIE = 8;
         override
        public void createTable()
         {
@@ -76,7 +80,10 @@ namespace gestioncomposantdepartement.DAO.MySql
             {
                 int i = 0;
                 StringBuilder sb = new StringBuilder("");
-                sb.Append(@"SELECT * FROM projetgestiondepartement.Coefficient ");
+                sb.Append(@"SELECT * FROM projetgestiondepartement.Coefficient  
+                JOIN projetgestiondepartement.TypeCours ON projetgestiondepartement.Coefficient.typeCours_id = projetgestiondepartement.TypeCours.id    
+                JOIN projetgestiondepartement.Categorie ON projetgestiondepartement.Coefficient.categorie_id = projetgestiondepartement.Categorie.id      
+                ");
                 foreach (KeyValuePair<string, string> c in contraintes)
                 {
                     if (i == 0) sb.Append("  WHERE projetgestiondepartement.Coefficient." + c.Key + " ='" + c.Value + "'");
@@ -91,7 +98,7 @@ namespace gestioncomposantdepartement.DAO.MySql
                 List<Coefficient> lc = new List<Coefficient>(msdr.FieldCount);
                 while (msdr.Read())
                 {
-                    lc.Add(this.objetCoefficient(msdr));
+                    lc.Add(this.objetCoefficientPourFindAll(msdr));
                 }
                 msdr.Close();
 
@@ -102,10 +109,13 @@ namespace gestioncomposantdepartement.DAO.MySql
 
         public List<Coefficient> findAll()
         {
-            commande.CommandText = @"SELECT * FROM projetgestiondepartement.Coefficient ";
+            commande.CommandText = @"SELECT * FROM projetgestiondepartement.Coefficient  
+               JOIN projetgestiondepartement.TypeCours ON projetgestiondepartement.Coefficient.typeCours_id = projetgestiondepartement.TypeCours.id    
+               JOIN projetgestiondepartement.Categorie ON projetgestiondepartement.Coefficient.categorie_id = projetgestiondepartement.Categorie.id      
+            ";
             MySqlDataReader msdr = commande.ExecuteReader();
             List<Coefficient> coefficients = new List<Coefficient>(msdr.FieldCount);
-            while (msdr.Read()) { coefficients.Add(objetCoefficient(msdr)); }
+            while (msdr.Read()) { coefficients.Add(objetCoefficientPourFindAll(msdr)); }
             msdr.Close();
             return coefficients;
         }
@@ -124,6 +134,25 @@ namespace gestioncomposantdepartement.DAO.MySql
             tc.id = msdr.GetInt32(ID_TYPE_COURS);
             tc.NomUniquePropriete = msdr.GetString(NOM_TYPE_COURS);
             coefficient.typeCours = tc;
+            return coefficient;
+        }
+
+        public Coefficient objetCoefficientPourFindAll(MySqlDataReader msdr)
+        {
+            Coefficient coefficient = new Coefficient();
+            coefficient.id = msdr.GetInt32(ID_COEFFICIENT);
+            coefficient.coefficient = msdr.GetDouble(COEFFICIENT_COEFFICIENT);
+            //type cours
+            TypeCours tc = new TypeCours();
+            tc.id = msdr.GetInt32(ID_TYPE_COURS);
+            tc.NomUniquePropriete = msdr.GetString(NOM_TYPE_COURS);
+            coefficient.typeCours = tc;
+            //categorie
+            Categorie categorie = new Categorie();
+            categorie.id = msdr.GetInt32(ID_CATEGORIE);
+            categorie.NomUniquePropriete = msdr.GetString(NOM_CATEGORIE);
+            categorie.NbHeuresPropriete = msdr.GetDouble(NB_HEURE_CATEGORIE); 
+            coefficient.categorie = categorie;
             return coefficient;
         }
     }
