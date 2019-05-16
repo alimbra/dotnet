@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7A226CA3-862A-43F1-A361-EE747224F750}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>gestioncomposantdepartement</RootNamespace>
+    <AssemblyName>gestioncomposantdepartement</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MaterialSkin">
+      <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\..\Downloads\mysql-connector-net-6.8.8-noinstall\v4.5\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAO\AbstractDAOFactory.cs" />
+    <Compile Include="DAO\DAO.cs" />
+    <Compile Include="DAO\MySql\AnneeDAO.cs" />
+    <Compile Include="DAO\MySql\CategorieDAO.cs" />
+    <Compile Include="DAO\MySql\CoefficientDAO.cs" />
+    <Compile Include="DAO\MySql\ConnexionMySql.cs" />
+    <Compile Include="DAO\MySql\CoursDAO.cs" />
+    <Compile Include="DAO\MySql\DepartementDAO.cs" />
+    <Compile Include="DAO\MySql\DiplomeDAO.cs" />
+    <Compile Include="DAO\MySql\EcDAO.cs" />
+    <Compile Include="DAO\MySql\MysqlDaoFactory.cs" />
+    <Compile Include="DAO\MySql\PersonnelDAO.cs" />
+    <Compile Include="DAO\MySql\SemestreDAO.cs" />
+    <Compile Include="DAO\MySql\TypeCoursDAO.cs" />
+    <Compile Include="DAO\MySql\UeDAO.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Metier\Annee.cs" />
+    <Compile Include="Metier\CalculeCategorie.cs" />
+    <Compile Include="Metier\Categorie.cs" />
+    <Compile Include="Metier\CategorieCoefficient.cs" />
+    <Compile Include="Metier\Coefficient.cs" />
+    <Compile Include="Metier\Cours.cs" />
+    <Compile Include="Metier\Departement.cs" />
+    <Compile Include="Metier\Diplome.cs" />
+    <Compile Include="Metier\Ec.cs" />
+    <Compile Include="Metier\Personnel.cs" />
+    <Compile Include="Metier\Semestre.cs" />
+    <Compile Include="Metier\TypeCours.cs" />
+    <Compile Include="Metier\Ue.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestDAO\CategorieTesteurDAO.cs" />
+    <Compile Include="TestDAO\CoefficientTesteurDAO.cs" />
+    <Compile Include="TestDAO\CoursTesteurDAO.cs" />
+    <Compile Include="TestDAO\DepartementTesteurDAO.cs" />
+    <Compile Include="TestDAO\EcTesteurDAO.cs" />
+    <Compile Include="TestDAO\PersonnelTesteurDAO.cs" />
+    <Compile Include="TestDAO\TesteurDAO.cs" />
+    <Compile Include="TestDAO\TestsDAO.cs" />
+    <Compile Include="TestDAO\TypeCoursTesteurDAO.cs" />
+    <Compile Include="TestDAO\UeTesteurDAO.cs" />
+    <Compile Include="UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="UserControl1.resx">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\gestioncomposantdepartement.DAO.MySql.AnneeDAO.datasource" />
+    <None Include="Properties\DataSources\gestioncomposantdepartement.DAO.MySql.DiplomeDAO.datasource" />
+    <None Include="Properties\DataSources\gestioncomposantdepartement.DAO.MySql.PersonnelDAO.datasource" />
+    <None Include="Properties\DataSources\gestioncomposantdepartement.DAO.MySql.SemestreDAO.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\acceuilDotNet.png" />
+    <Content Include="Resources\categorie.png" />
+    <Content Include="Resources\categorie1.png" />
+    <None Include="Resources\detail.png" />
+    <Content Include="Resources\diplome.png" />
+    <Content Include="Resources\diplome1.png" />
+    <Content Include="Resources\EffacerIcone.PNG" />
+    <Content Include="Resources\EffacerIcone1.PNG" />
+    <Content Include="Resources\logoUniversite.png" />
+    <Content Include="Resources\logoUniversite3.png" />
+    <Content Include="Resources\modifierIcone.PNG" />
+    <Content Include="Resources\personnel.png" />
+    <Content Include="Resources\personnel1.png" />
+    <Content Include="Resources\plus.png" />
+    <Content Include="Resources\ue.png" />
+    <Content Include="Resources\ue1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
